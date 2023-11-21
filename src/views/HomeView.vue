@@ -1,8 +1,22 @@
 <template>
-    <p>HOME PAGE</p>
+      <div v-for="post in postList" :key="post.id">
+        <PostComponent :post="post" />
+      </div>
   </template>
   
   <script>
+  import PostComponent from '@/components/PostComponent.vue';
+
+export default {
+  components: {
+    PostComponent,
+  },
+  computed: {
+    postList() {
+      return this.$store.state.postList;
+    },
+  },
+};
   
   </script>
   
