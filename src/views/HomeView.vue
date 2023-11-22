@@ -2,6 +2,7 @@
       <div v-for="post in postList" :key="post.id">
         <PostComponent :post="post" />
       </div>
+  <button class="reset-button" v-on:click="ResetLikes">Reset likes</button>
   </template>
   
   <script>
@@ -16,6 +17,11 @@ export default {
       return this.$store.state.postList;
     },
   },
+  methods: {
+    ResetLikes: function (){
+      this.$store.commit("ResetLikes")
+    }
+    },
 };
   
   </script>
@@ -29,4 +35,8 @@ export default {
     color: #2c3e50;
     margin-top: 60px;
   }
+  .reset-button{
+
+  }
+
   </style>

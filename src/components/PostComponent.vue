@@ -5,7 +5,8 @@
       <p class="date">{{ post.date}}</p>
       <img class="image" :src="post.image" alt="Post Image :(">
       <h3 class="comment-box"> @{{ post.username }}: "{{ post.content }}"</h3>
-      <img class="like" src="../assets/likeButton.png" alt="Like Icon">
+      <img class="like" src="../assets/likeButton.png" alt="Like Icon" v-on:click="IncreaseLikes(post.id)">
+      <p class="like-count">{{post.likeCount}} Likes</p>
     </div>
     </section>
   </template>
@@ -18,7 +19,13 @@
       required: true,
     },
   },
+    methods:{
+      IncreaseLikes: function (postID) {
+        this.$store.commit("IncreaseLikes",postID)
+      },
+    }
 };
+
   </script>
   
   <style>
@@ -86,5 +93,11 @@
     top: 0;
     right: 0;
     padding: 5px 10px;
+}
+.like-count{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px 10px;
 }
   </style>
