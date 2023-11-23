@@ -14,12 +14,12 @@
       <div v-if="!isPasswordValid" class="password-validation">
         Password is not valid. Please follow the conditions:
         <ul class="no-bullets">
-          <li>At least 8 characters and less than 15 characters</li>
-          <li>At least one uppercase alphabet character</li>
-          <li>At least two lowercase alphabet characters</li>
-          <li>At least one numeric value</li>
-          <li>Should start with an uppercase alphabet</li>
-          <li>Should include the character "_"</li>
+          <li v-if="!hasMinLength">At least 8 characters and less than 15 characters</li>
+          <li v-if="!hasUpperCase">At least one uppercase alphabet character</li>
+          <li v-if="!hasLowerCase">At least two lowercase alphabet characters</li>
+          <li v-if="!hasNumeric">At least one numeric value</li>
+          <li v-if="!startsWithUpperCase">Should start with an uppercase alphabet</li>
+          <li v-if="!hasUnderscore">Should include the character "_"</li>
         </ul>
       </div>
       <button type="submit" :disabled="!isPasswordValid" class="signup-button">Signup</button>
@@ -29,6 +29,27 @@
 
 <script>
 export default {
+  computed: {
+    hasLowerCase: function() {
+      const lowerCaseCount = (this.password.match(/[a-z]/g) || []).length;
+      return lowerCaseCount >= 2;
+    },
+    hasMinLength: function() {
+      return this.password.length >= 8 && this.password.length < 15;
+    },
+    hasNumeric: function () {
+      return /\d/.test(this.password);
+    },
+    hasUnderscore: function () {
+      return /_/.test(this.password);
+    },
+    hasUpperCase: function () {
+      return /[A-Z]/.test(this.password);
+    },
+    startsWithUpperCase: function () {
+      return /^[A-Z]/.test(this.password);
+    },
+  },
   data() {
     return {
       username: '',
@@ -38,10 +59,14 @@ export default {
   },
   methods: {
     validatePassword() {
-      // Password validation logic
-      const regex = /^(?=.*[A-Z])(?=.*[a-z].*[a-z])(?=.*\d)(?=.*_)[A-Z].{7,14}$/;
-
-      this.isPasswordValid = regex.test(this.password);
+      // Combine the individual conditions to determine overall password validity
+      this.isPasswordValid =
+          this.hasMinLength &&
+          this.hasUpperCase &&
+          this.hasLowerCase &&
+          this.hasNumeric &&
+          this.startsWithUpperCase &&
+          this.hasUnderscore;
     },
     submitForm() {
       // Your signup logic goes here
@@ -55,9 +80,11 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.input{
+
+.input {
   margin: 5px;
 }
+
 .password-validation {
   margin-top: 5px;
 }
@@ -65,7 +92,8 @@ export default {
 .no-bullets {
   list-style-type: none;
 }
-.signup-button{
+
+.signup-button {
 
 }
 </style>
