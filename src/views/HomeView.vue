@@ -33,10 +33,21 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
-  .reset-button{
+  .reset-button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 25%;
+  margin: 0 auto; 
+}
 
-  }
+.reset-button:hover {
+  background-color: #2980b9;
+}
 
   </style>

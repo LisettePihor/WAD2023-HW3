@@ -40,5 +40,6 @@ header {
     border: 2px solid #df8666;
     background-color: #e6beaf;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 </style>

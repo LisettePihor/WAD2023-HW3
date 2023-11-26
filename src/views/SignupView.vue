@@ -1,5 +1,7 @@
 <template>
-  <SignupForm></SignupForm>
+  <div class="signup-container">
+    <SignupForm></SignupForm>
+  </div>
 </template>
 
 <script>
@@ -20,6 +22,32 @@ export default ({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.signup-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 15px;
+  border: 2px solid #df8666;
+  border-radius: 5px;
+  width: 50%;
+  margin: 0 auto;
+  background-color: #eadedc;
+}
+
+.signup-button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 25%;
+  margin: 0 auto;
+}
+
+.signup-button:hover {
+  background-color: #2980b9;
 }
 </style>
